@@ -1,16 +1,5 @@
 <?php
-
-$connect = new PDO("mysql:host=localhost; db_name=forum_db; charset=utf8", "root", "");
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = htmlspecialchars(strip_tags($_POST["username"]));
-    $text = htmlspecialchars(strip_tags($_POST["text"]));
-
-    if ($username && $text) {
-        $query = $connect->query("INSERT INTO forum_db.comments (username, text) VALUES ('$username', '$text')");
-        header('Location: index.php');
-    }
-}
+require("func/connect.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <form action="" method="post">
+    <form action="func/add.php" method="post">
         <input type="text" name="username" required placeholder="Username">
         <textarea name="text" cols="30" rows="3" required placeholder="Comment"></textarea>
         <input type="submit" value="Send">
